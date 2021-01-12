@@ -11,6 +11,9 @@
               <e p="BombController.cs" t="Include" />
               <e p="ExplosionController.cs" t="Include" />
             </e>
+            <e p="BrickWall" t="Include">
+              <e p="BrickWallController.cs" t="Include" />
+            </e>
             <e p="Camera" t="Include">
               <e p="CameraController.cs" t="Include" />
             </e>
@@ -22,6 +25,9 @@
             <e p="Player" t="Include">
               <e p="PlayerController.cs" t="Include" />
             </e>
+          </e>
+          <e p="Shaders" t="Include">
+            <e p="DesolveShader.shader" t="Include" />
           </e>
         </e>
         <e p="EffectExamples" t="Include">

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace BomberMan.Scripts.Enemy
@@ -38,7 +39,7 @@ namespace BomberMan.Scripts.Enemy
         private void SetRandomStartPos()
         {
             transform.position = GameManager.Instance.walkablePath[
-                    Random.Range(0, GameManager.Instance.walkablePath.Count - 1)];
+                    Random.Range(0, GameManager.Instance.walkablePath.Count - 1)].position;
         }
 
         private void SetNextPos(Direction direction = Direction.UNSPECIFIED)
@@ -127,7 +128,8 @@ namespace BomberMan.Scripts.Enemy
         private bool IsWalkablePosition(Vector3 pos)
         {
             //Debug.Log("Next Position : " + pos);
-            if (GameManager.Instance.walkablePath.Contains(pos))
+            var p = GameManager.Instance.walkablePath.Exists(x => x.position == pos);
+            if (p) 
             {
                 _nextPos = pos;
                 return true;

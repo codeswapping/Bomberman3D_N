@@ -15,6 +15,9 @@ namespace BomberMan.Scripts
         [FormerlySerializedAs("Explosion Effect Prefab")] public GameObject explosionPrefab;
         [FormerlySerializedAs("Enemy Prefab")]public GameObject EnemyAIPrefab;
 
+        [FormerlySerializedAs("Brick Wall Prefab")]
+        public GameObject brickWallPrefab;
+
         [Header("Material Preferences")][Space(20)]
         [FormerlySerializedAs("Base Material")]public Material baseMaterial;
         [FormerlySerializedAs("Solid Bar Material")]public Material solidBlockMat;
@@ -27,8 +30,9 @@ namespace BomberMan.Scripts
         public int rowCount = 10;
         [FormerlySerializedAs("Column Count")] public int columnCount = 10;
         public CameraController cameraController;
+
         [FormerlySerializedAs("_walkablePath")]
-        public List<Vector3> walkablePath = new List<Vector3>();
+        public List<WalkablePathInfo> walkablePath = new List<WalkablePathInfo>();
 
         private void Awake()
         {
@@ -98,30 +102,31 @@ namespace BomberMan.Scripts
                     g.GetComponent<MeshRenderer>().material = solidBlockMat;
                     //g.AddComponent<BoxCollider>();
 
-                    walkablePath.Add(new Vector3(x, 0.4f, z + 1));
-                    walkablePath.Add(new Vector3(x + 1, 0.4f, z + 1));
-                    walkablePath.Add(new Vector3(x + 1, 0.4f, z));
+                    walkablePath.Add(new WalkablePathInfo{ isBrickWall = false, position = new Vector3(x, 0.4f, z + 1)});
+                    walkablePath.Add(new WalkablePathInfo{ isBrickWall = false, position = new Vector3(x + 1, 0.4f, z + 1)});
+                    walkablePath.Add(new WalkablePathInfo{ isBrickWall = false, position = new Vector3(x + 1, 0.4f, z)});
 
                     if (x == 1)
                     {
                         if (z == 1)
                         {
-                            walkablePath.Add(new Vector3(x - 1, 0.4f, z));
-                            walkablePath.Add(new Vector3(x - 1, 0.4f, z + 1));
-                            walkablePath.Add(new Vector3(x - 1, 0.4f, z - 1));
-                            walkablePath.Add(new Vector3(x, 0.4f, z - 1));
-                            walkablePath.Add(new Vector3(x + 1, 0.4f, z - 1));
+                            walkablePath.Add(new WalkablePathInfo{ isBrickWall = false, position = new Vector3(x - 1, 0.4f, z)});
+                            walkablePath.Add(new WalkablePathInfo{ isBrickWall = false, position = new Vector3(x - 1, 0.4f, z + 1)});
+                            walkablePath.Add(new WalkablePathInfo{ isBrickWall = false, position = new Vector3(x - 1, 0.4f, z - 1)});
+                            walkablePath.Add(new WalkablePathInfo{ isBrickWall = false, position = new Vector3(x, 0.4f, z - 1)});
+                            walkablePath.Add(new WalkablePathInfo{ isBrickWall = false, position = new Vector3(x + 1, 0.4f, z - 1)});
                         }
                         else
                         {
-                            walkablePath.Add(new Vector3(x - 1, 0.4f, z));
-                            walkablePath.Add(new Vector3(x - 1, 0.4f, z + 1));
+                            walkablePath.Add(new WalkablePathInfo{isBrickWall = false, 
+                                position = new Vector3(x - 1, 0.4f, z)});
+                            walkablePath.Add(new WalkablePathInfo{ isBrickWall = false, position = new Vector3(x - 1, 0.4f, z + 1)});
                         }
                     }
                     else if (z == 1)
                     {
-                        walkablePath.Add(new Vector3(x + 1, 0.4f, z - 1));
-                        walkablePath.Add(new Vector3(x, 0.4f, z - 1));
+                        walkablePath.Add(new WalkablePathInfo{ isBrickWall = false, position = new Vector3(x + 1, 0.4f, z - 1)});
+                        walkablePath.Add(new WalkablePathInfo{ isBrickWall = false, position = new Vector3(x, 0.4f, z - 1)});
                     }
 
                     //var s3 = GameObject.CreatePrimitive(PrimitiveType.Sphere);
@@ -156,5 +161,11 @@ namespace BomberMan.Scripts
         LEFT = 2,
         RIGHT = 3,
         ALL = 4
+    }
+
+    public struct WalkablePathInfo
+    {
+        public bool isBrickWall;
+        public Vector3 position;
     }
 }
