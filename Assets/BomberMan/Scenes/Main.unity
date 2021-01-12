@@ -606,13 +606,13 @@ MonoBehaviour:
     type: 3}
   EnemyAIPrefab: {fileID: 7521655254916562714, guid: acdd8c28742f2426e91673e3c3c527d5,
     type: 3}
+  brickWallPrefab: {fileID: 0}
   baseMaterial: {fileID: 2100000, guid: dc2c326d87a1d4074994f16346bc1383, type: 2}
   solidBlockMat: {fileID: 2100000, guid: 7edf128f8d9e541029f73a4b86628861, type: 2}
   enemyNumber: 5
   rowCount: 10
-  columnCount: 10
+  columnCount: 20
   cameraController: {fileID: 148752353}
-  walkablePath: []
 --- !u!4 &1780323021
 Transform:
   m_ObjectHideFlags: 0

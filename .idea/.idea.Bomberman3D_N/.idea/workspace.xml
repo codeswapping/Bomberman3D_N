@@ -20,11 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="39666c99-b032-49c6-ade0-6e8774e8b60f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Bomberman3D_N/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Bomberman3D_N/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Bomberman3D_N/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Bomberman3D_N/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/BomberMan/Scenes/Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BomberMan/Scenes/Main.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BomberMan/Scripts/Enemy/EnemyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BomberMan/Scripts/Enemy/EnemyController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/BomberMan/Scripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BomberMan/Scripts/GameManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +94,7 @@
       <updated>1610428481837</updated>
       <workItem from="1610428491152" duration="2778000" />
       <workItem from="1610431912362" duration="6362000" />
-      <workItem from="1610451319058" duration="1504000" />
+      <workItem from="1610451319058" duration="1573000" />
     </task>
     <servers />
   </component>
