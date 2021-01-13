@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7521655254023708073}
   - component: {fileID: 7521655254023708071}
   - component: {fileID: 7521655254023708070}
+  - component: {fileID: 9143640934767072896}
   m_Layer: 0
   m_Name: LeftTrigger
   m_TagString: Untagged
@@ -40,7 +41,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7521655254023708072}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.3, y: 0.3, z: 0.3}
@@ -59,6 +60,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Direction: 3
   IsTriggered: 0
+--- !u!54 &9143640934767072896
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7521655254023708072}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &7521655254180583267
 GameObject:
   m_ObjectHideFlags: 0
@@ -70,6 +87,7 @@ GameObject:
   - component: {fileID: 7521655254180583264}
   - component: {fileID: 7521655254180583198}
   - component: {fileID: 7521655254180583265}
+  - component: {fileID: 6307337695457051186}
   m_Layer: 0
   m_Name: BottomTrigger
   m_TagString: Untagged
@@ -99,7 +117,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7521655254180583267}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.3, y: 0.3, z: 0.3}
@@ -118,6 +136,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Direction: 1
   IsTriggered: 0
+--- !u!54 &6307337695457051186
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7521655254180583267}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &7521655254393102731
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,6 +163,7 @@ GameObject:
   - component: {fileID: 7521655254393102728}
   - component: {fileID: 7521655254393102726}
   - component: {fileID: 7521655254393102729}
+  - component: {fileID: 360028675051759156}
   m_Layer: 0
   m_Name: TopTrigger
   m_TagString: Untagged
@@ -158,7 +193,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7521655254393102731}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.3, y: 0.3, z: 0.3}
@@ -177,6 +212,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Direction: 0
   IsTriggered: 0
+--- !u!54 &360028675051759156
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7521655254393102731}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &7521655254395509576
 GameObject:
   m_ObjectHideFlags: 0
@@ -188,6 +239,7 @@ GameObject:
   - component: {fileID: 7521655254395509577}
   - component: {fileID: 7521655254395509575}
   - component: {fileID: 7521655254395509574}
+  - component: {fileID: 2018778589581539932}
   m_Layer: 0
   m_Name: RightTrigger
   m_TagString: Untagged
@@ -217,7 +269,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7521655254395509576}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.3, y: 0.3, z: 0.3}
@@ -236,6 +288,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Direction: 2
   IsTriggered: 0
+--- !u!54 &2018778589581539932
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7521655254395509576}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &7521655254916562714
 GameObject:
   m_ObjectHideFlags: 0

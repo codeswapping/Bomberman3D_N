@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using BomberMan.Scripts.Camera;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 namespace BomberMan.Scripts
 {
@@ -14,6 +15,7 @@ namespace BomberMan.Scripts
         [Header("Prefab References")]
         [FormerlySerializedAs("Explosion Effect Prefab")] public GameObject explosionPrefab;
         [FormerlySerializedAs("Enemy Prefab")]public GameObject EnemyAIPrefab;
+        [FormerlySerializedAs("Bomb Prefab")] public GameObject bombPrefab;
 
         [FormerlySerializedAs("Brick Wall Prefab")]
         public GameObject brickWallPrefab;
@@ -30,6 +32,10 @@ namespace BomberMan.Scripts
         public int rowCount = 10;
         [FormerlySerializedAs("Column Count")] public int columnCount = 10;
         public CameraController cameraController;
+        [FormerlySerializedAs("Minimum Brick count")]
+        public int minBrickCount;
+        [FormerlySerializedAs("Maximum Brick Count")]
+        public int maxBrickCount;
 
         [FormerlySerializedAs("_walkablePath")]
         public List<WalkablePathInfo> walkablePath = new List<WalkablePathInfo>();
@@ -133,7 +139,30 @@ namespace BomberMan.Scripts
                 }
             }
 
+            AddBrickWalls();
             AddEnemy();
+        }
+
+        private void AddBrickWalls()
+        {
+            var brickcount = Random.Range(minBrickCount, maxBrickCount);
+            if (brickcount > walkablePath.Count - 10)
+                brickcount = walkablePath.Count - Random.Range(10, 20);
+
+            for (int brick = 0; brick < brickcount; brick++)
+            {
+                var pos = Random.Range(10, walkablePath.Count - 1);
+                var walkablePathInfo = walkablePath[pos];
+                while (walkablePathInfo.isBrickWall)
+                {
+                    pos = Random.Range(10, walkablePath.Count - 1);
+                }
+
+                walkablePathInfo.isBrickWall = true;
+                var b = Instantiate(brickWallPrefab, walkablePathInfo.position, Quaternion.identity)
+                    .GetComponent<BrickWallController>();
+                b.pathIndex = pos;
+            }
         }
 
         private void AddEnemy()

@@ -17,6 +17,7 @@ namespace BomberMan.Scripts.Enemy
         private void Start()
         {
             var triggers = GetComponentsInChildren<TiggerManager>();
+            Debug.Log("Triggers : " + triggers.Length);
             foreach (var trigger in triggers)
             {
                 trigger.onTriggered += OnTriggered;
@@ -28,7 +29,12 @@ namespace BomberMan.Scripts.Enemy
 
         private void Update()
         {
-            if (!IsWalking) return;
+            if (!IsWalking)
+            {
+                CheckCanWalk();
+                return;
+            }
+
             _currentWalkTime -= Time.deltaTime;
             transform.position = Vector3.MoveTowards(transform.position, _nextPos, walkSpeed * Time.deltaTime);
             if (!(Vector3.Distance(transform.position, _nextPos) <= 0.01)) return;
@@ -36,104 +42,127 @@ namespace BomberMan.Scripts.Enemy
             SetNextPos();
         }
 
+        private bool CheckCanWalk()
+        {
+            var canwalk = false;
+            var dirc = "";
+            var dint = -1;
+            if (_currentWalkTime <= 0)
+            {
+                _currentWalkTime = Random.Range(minWalkTime, maxWalkTime);
+                dint = Random.Range(0, 4);
+                dirc += dint;
+            }
+
+            while (dirc.Length < 4)
+            {
+                while (dirc.Contains(dint.ToString()))
+                {
+                    dint = Random.Range(0, 4);
+                }
+
+                dirc += dint.ToString();
+                _direction = (Direction) dint;
+
+                switch (_direction)
+                {
+                    case Direction.LEFT:
+                        _nextPos.x -= 1;
+
+                        break;
+                    case Direction.RIGHT:
+                        _nextPos.x+=1;
+
+                        break;
+                    case Direction.TOP:
+                        _nextPos.z += 1;
+
+
+                        break;
+                    case Direction.BOTTOM:
+                        _nextPos.z -= 1;
+                        if (IsWalkablePosition(_nextPos))
+                        {
+                            canwalk = true;
+                        }
+
+                        break;
+                }
+            }
+
+            return canwalk;
+        }
+
         private void SetRandomStartPos()
         {
-            transform.position = GameManager.Instance.walkablePath[
-                    Random.Range(0, GameManager.Instance.walkablePath.Count - 1)].position;
+            var p = Random.Range(10, GameManager.Instance.walkablePath.Count - 1);
+            while (GameManager.Instance.walkablePath[p].isBrickWall)
+            {
+                p = Random.Range(10, GameManager.Instance.walkablePath.Count - 1);
+            }
+
+            transform.position = _nextPos = GameManager.Instance.walkablePath[p].position;
         }
 
         private void SetNextPos(Direction direction = Direction.UNSPECIFIED)
         {
+            var canwalk = false;
             if (direction == Direction.UNSPECIFIED)
             {
-                if (_currentWalkTime <= 0)
-                {
-                    _currentWalkTime = Random.Range(minWalkTime, maxWalkTime);
-                    _direction = (Direction) Random.Range(0, 4);
-                }
-
-                var canwalk = false;
-                while (!canwalk)
-                {
-                    //Debug.Log("Walk Direction : " + _direction);
-                    switch (_direction)
-                    {
-                        case Direction.TOP:
-                            if (IsWalkablePosition(new Vector3(transform.position.x, 0.4f, transform.position.z + 1)))
-                            {
-                                canwalk = true;
-                            }
-
-                            break;
-                        case Direction.BOTTOM:
-                            if (IsWalkablePosition(new Vector3(transform.position.x, 0.4f, transform.position.z - 1)))
-                            {
-                                canwalk = true;
-                            }
-
-                            break;
-                        case Direction.LEFT:
-                            if (IsWalkablePosition(new Vector3(transform.position.x - 1, 0.4f, transform.position.z)))
-                            {
-                                canwalk = true;
-                            }
-
-                            break;
-                        case Direction.RIGHT:
-                            if (IsWalkablePosition(new Vector3(transform.position.x + 1, 0.4f, transform.position.z)))
-                            {
-                                canwalk = true;
-                            }
-
-                            break;
-                    }
-
-                    //Debug.Log("Walkable : " + canwalk);
-                }
+                canwalk = CheckCanWalk();
             }
             else
             {
                 switch (direction)
                 {
                     case Direction.TOP:
-                        _nextPos = new Vector3(transform.position.x, 0.4f,
-                            Mathf.FloorToInt(transform.position.z / GameManager.Instance.rowCount) +
-                            1);
+                        _nextPos.z += 1;
+                        
                         break;
                     case Direction.BOTTOM:
-                        _nextPos = new Vector3(transform.position.x, 0.4f,
-                            Mathf.FloorToInt(transform.position.z / GameManager.Instance.rowCount) -
-                            1);
+                        _nextPos.z -= 1;
+
                         break;
                     case Direction.LEFT:
-                        _nextPos = new Vector3(
-                            Mathf.FloorToInt(transform.position.x /
-                                             GameManager.Instance.columnCount) - 1, 0.4f,
-                            transform.position.z);
+                        _nextPos.x -= 1;
+                        
                         break;
                     case Direction.RIGHT:
-                        _nextPos = new Vector3(
-                            Mathf.FloorToInt(transform.position.x /
-                                             GameManager.Instance.columnCount) + 1, 0.4f,
-                            transform.position.z);
+                        _nextPos.z += 1;
+
                         break;
+                }
+
+                if (IsWalkablePosition(_nextPos))
+                {
+                    canwalk = true;
                 }
 
                 _direction = direction;
             }
 
-            IsWalking = true;
+            IsWalking = canwalk;
         }
 
         private bool IsWalkablePosition(Vector3 pos)
         {
             //Debug.Log("Next Position : " + pos);
-            var p = GameManager.Instance.walkablePath.Exists(x => x.position == pos);
-            if (p) 
+            WalkablePathInfo? v = null;
+            foreach (var path in GameManager.Instance.walkablePath)
+            {
+                if (path.position.Equals(pos) && !path.isBrickWall)
+                {
+                    v = path;
+                }
+            }
+
+            if (v != null)
             {
                 _nextPos = pos;
                 return true;
             }
+
+            Debug.Log("Path is : " + v);
 
             _direction = (Direction) Random.Range(0, 4);
             return false;
@@ -142,20 +171,22 @@ namespace BomberMan.Scripts.Enemy
         private void OnTriggered(TiggerManager.TriggerDirection direction)
         {
             IsWalking = false;
+            Debug.Log("Trigger entered : " + direction);
             switch (direction)
             {
                 case TiggerManager.TriggerDirection.TOP:
                     SetNextPos(Direction.BOTTOM);
                     break;
                 case TiggerManager.TriggerDirection.BOTTOM:
+                    SetNextPos(Direction.TOP);
                     break;
                 case TiggerManager.TriggerDirection.LEFT:
+                    SetNextPos(Direction.RIGHT);
                     break;
                 case TiggerManager.TriggerDirection.RIGHT:
+                    SetNextPos(Direction.LEFT);
                     break;
             }
         }
-
-
     }
 }

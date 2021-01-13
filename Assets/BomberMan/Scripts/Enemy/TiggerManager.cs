@@ -17,7 +17,7 @@ namespace BomberMan.Scripts.Enemy
         private void OnTriggerEnter(Collider other)
         {
             IsTriggered = true;
-            onTriggered.Invoke(Direction);
+            onTriggered?.Invoke(Direction);
         }
 
         private void OnTriggerExit(Collider other)

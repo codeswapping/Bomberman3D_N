@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using BomberMan.Scripts;
+﻿using BomberMan.Scripts;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -34,7 +31,8 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            
+            //Place Bomb Logic
+            PlaceBomb();
         }
     }
     private void FixedUpdate()
@@ -42,6 +40,16 @@ public class PlayerController : MonoBehaviour
         playerRB.transform.position = new Vector3(playerRB.transform.position.x + speed * _horizontal * Time.deltaTime,
             playerRB.transform.position.y,
             playerRB.transform.position.z + speed * _vertical * Time.deltaTime);
+    }
+
+    private void PlaceBomb()
+    {
+        if (_bombPlaceCount <= 0) return;
+        var pos = new Vector3(
+            Mathf.FloorToInt(transform.position.x / GameManager.Instance.rowCount),
+            0,
+            Mathf.FloorToInt(transform.position.z / GameManager.Instance.columnCount));
+        Instantiate(GameManager.Instance.bombPrefab, pos, Quaternion.identity);
     }
     public void UpdateBombCount()
     {

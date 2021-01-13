@@ -20,7 +20,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="39666c99-b032-49c6-ade0-6e8774e8b60f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Bomberman3D_N/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Bomberman3D_N/.idea/indexLayout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Bomberman3D_N/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Bomberman3D_N/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BomberMan/Prefabs/Enemy/EnemyAI.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BomberMan/Prefabs/Enemy/EnemyAI.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/BomberMan/Scenes/Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BomberMan/Scenes/Main.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BomberMan/Scripts/BrickWall/BrickWallController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BomberMan/Scripts/BrickWall/BrickWallController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BomberMan/Scripts/Enemy/EnemyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BomberMan/Scripts/Enemy/EnemyController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BomberMan/Scripts/Enemy/TiggerManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BomberMan/Scripts/Enemy/TiggerManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BomberMan/Scripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BomberMan/Scripts/GameManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/BomberMan/Scripts/Player/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/BomberMan/Scripts/Player/PlayerController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,14 +47,14 @@
         <option value="$PROJECT_DIR$/Library/PackageCache/com.unity.postprocessing@2.0.3-preview/PostProcessing/Runtime/PostProcessManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" />
         <option value="$PROJECT_DIR$/Assets/BomberMan/Scripts/Camera/CameraController.cs" />
-        <option value="$PROJECT_DIR$/Assets/BomberMan/Scripts/Enemy/TiggerManager.cs" />
         <option value="$PROJECT_DIR$/Assets/BomberMan/Scripts/LevelGenerator/LevelGenerator.cs" />
-        <option value="$PROJECT_DIR$/Assets/BomberMan/Scripts/Player/PlayerController.cs" />
         <option value="$PROJECT_DIR$/Assets/BomberMan/Scripts/Bomb/BombController.cs" />
         <option value="$PROJECT_DIR$/Assets/BomberMan/Scripts/Bomb/ExplosionController.cs" />
         <option value="$PROJECT_DIR$/Assets/BomberMan/Shaders/DesolveShader.shader" />
-        <option value="$PROJECT_DIR$/Assets/BomberMan/Scripts/BrickWall/BrickWallController.cs" />
+        <option value="$PROJECT_DIR$/Assets/BomberMan/Scripts/Player/PlayerController.cs" />
         <option value="$PROJECT_DIR$/Assets/BomberMan/Scripts/GameManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/BomberMan/Scripts/BrickWall/BrickWallController.cs" />
+        <option value="$PROJECT_DIR$/Assets/BomberMan/Scripts/Enemy/TiggerManager.cs" />
         <option value="$PROJECT_DIR$/Assets/BomberMan/Scripts/Enemy/EnemyController.cs" />
       </list>
     </option>
@@ -95,6 +103,8 @@
       <workItem from="1610428491152" duration="2778000" />
       <workItem from="1610431912362" duration="6362000" />
       <workItem from="1610451319058" duration="1573000" />
+      <workItem from="1610516475248" duration="2331000" />
+      <workItem from="1610520947548" duration="2372000" />
     </task>
     <servers />
   </component>
