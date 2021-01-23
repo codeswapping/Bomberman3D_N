@@ -5,6 +5,7 @@ using BomberMan.Scripts.Camera;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
+using System.Linq;
 
 namespace BomberMan.Scripts
 {
@@ -16,6 +17,7 @@ namespace BomberMan.Scripts
         [FormerlySerializedAs("Explosion Effect Prefab")] public GameObject explosionPrefab;
         [FormerlySerializedAs("Enemy Prefab")]public GameObject EnemyAIPrefab;
         [FormerlySerializedAs("Bomb Prefab")] public GameObject bombPrefab;
+        [FormerlySerializedAs("Power ups Prefabs")] public List<PowerupManager> Powerups;
 
         [FormerlySerializedAs("Brick Wall Prefab")]
         public GameObject brickWallPrefab;
@@ -71,24 +73,28 @@ namespace BomberMan.Scripts
             ground.GetComponent<MeshRenderer>().material = baseMaterial;
 
             var topWall = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            topWall.layer = 14;
             topWall.name = "topWall";
             topWall.transform.position = new Vector3(rowCount, 0, columnCount * 2 + 1);
             topWall.transform.localScale = new Vector3(rowCount * 2 + 1, 1, 1);
             topWall.GetComponent<MeshRenderer>().material = solidBlockMat;
 
             var bottomWall = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            bottomWall.layer = 14;
             bottomWall.name = "bottomWall";
             bottomWall.transform.position = new Vector3(rowCount, 0, -1);
             bottomWall.transform.localScale = new Vector3(rowCount * 2 + 1, 1, 1);
             bottomWall.GetComponent<MeshRenderer>().material = solidBlockMat;
 
             var leftWall = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            leftWall.layer = 14;
             leftWall.name = "leftWall";
             leftWall.transform.position = new Vector3(-1, 0, columnCount);
             leftWall.transform.localScale = new Vector3(1, 1, columnCount * 2 + 3);
             leftWall.GetComponent<MeshRenderer>().material = solidBlockMat;
 
             var rightWall = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            rightWall.layer = 14;
             rightWall.name = "rightWall";
             rightWall.transform.position = new Vector3(rowCount * 2 + 1, 0, columnCount);
             rightWall.transform.localScale = new Vector3(1, 1, columnCount * 2 + 3);
@@ -102,6 +108,7 @@ namespace BomberMan.Scripts
                 {
                     //Debug.Log("Generating : row - " + x + ", Column - " +z);
                     var g = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                    g.layer = 14;
                     g.transform.rotation = Quaternion.identity;
                     g.transform.position = new Vector3(x, 0.5f, z);
                     g.transform.SetParent(transform);
@@ -139,7 +146,9 @@ namespace BomberMan.Scripts
                 }
             }
 
+            yield return 0;
             AddBrickWalls();
+            yield return 0;
             AddEnemy();
         }
 
@@ -149,6 +158,7 @@ namespace BomberMan.Scripts
             if (brickcount > walkablePath.Count - 10)
                 brickcount = walkablePath.Count - Random.Range(10, 20);
 
+            var powerupindex = Random.Range(0, brickcount);
             for (int brick = 0; brick < brickcount; brick++)
             {
                 var pos = Random.Range(10, walkablePath.Count - 1);
@@ -156,13 +166,28 @@ namespace BomberMan.Scripts
                 while (walkablePathInfo.isBrickWall)
                 {
                     pos = Random.Range(10, walkablePath.Count - 1);
+                    walkablePathInfo = walkablePath[pos];
+                }
+                if (brick == powerupindex)
+                {
+                    walkablePathInfo.abilityType = GetAbilityType();
+                    walkablePathInfo.hasAbility = true;
+                    //Debug.Log("Ability Type : " + walkablePathInfo.abilityType.ToString());
+                    //Debug.Log("Walkable Path Pos : " + pos);
+                    //Debug.Log("Walkable Path Position : " + walkablePathInfo.position);
                 }
 
                 walkablePathInfo.isBrickWall = true;
                 var b = Instantiate(brickWallPrefab, walkablePathInfo.position, Quaternion.identity)
                     .GetComponent<BrickWallController>();
                 b.pathIndex = pos;
+                walkablePath[pos] = walkablePathInfo;
             }
+        }
+
+        private PowerUpAbilities GetAbilityType()
+        {
+            return PowerUpAbilities.IncreaseFlame;
         }
 
         private void AddEnemy()
@@ -172,6 +197,11 @@ namespace BomberMan.Scripts
                 Instantiate(EnemyAIPrefab);
             }
         }
+
+        public string GetPowerupName(PowerUpAbilities ability)
+        {
+            return Powerups.Find(x => x.AbilityType == ability).PrefabName;
+        }
     }
 
     public enum PowerUpAbilities
@@ -179,7 +209,9 @@ namespace BomberMan.Scripts
         ExplosionAtWill,
         CanPassThroughWalls,
         CanPassThroughBomb,
-        IsSpeedUp
+        IsSpeedUp,
+        IncreaseFlame,
+        IncreaseBomb
     }
     
     public enum Direction
@@ -191,10 +223,11 @@ namespace BomberMan.Scripts
         RIGHT = 3,
         ALL = 4
     }
-
     public struct WalkablePathInfo
     {
         public bool isBrickWall;
+        public bool hasAbility;
+        public PowerUpAbilities abilityType;
         public Vector3 position;
     }
 }

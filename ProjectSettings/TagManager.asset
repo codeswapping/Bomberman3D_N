@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - BrickWall
+  - Enemy
+  - Bomb
+  - PowerUp
   layers:
   - Default
   - TransparentFX
@@ -13,14 +17,14 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - DestructableWall
+  - Enemy
+  - Player
+  - Powerup
+  - IgnoreCollision
+  - Bomb
+  - Other
+  - PlayerEscapeTrigger
   - 
   - 
   - 

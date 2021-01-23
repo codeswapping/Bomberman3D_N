@@ -24,7 +24,7 @@ namespace BomberMan.Scripts.Camera
         {
             maxX = maxx;
             maxY = maxy;
-            Debug.Log("Max X : " + maxx + ", Max Y : " + maxy);
+            //Debug.Log("Max X : " + maxx + ", Max Y : " + maxy);
         }
 
         private void LateUpdate()
