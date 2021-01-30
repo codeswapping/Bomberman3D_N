@@ -174,7 +174,7 @@ namespace BomberMan.Scripts.Enemy
             while (dis < 1f)
             {
                 dis += Time.deltaTime * 2f;
-                render.material.SetFloat("_Level", dis);
+                render.material.SetFloat("_SliceAmount", dis);
                 yield return 0;
             }
             Destroy(gameObject);

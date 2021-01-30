@@ -23,7 +23,7 @@ public class BrickWallController : MonoBehaviour
         while (dis < 1f)
         {
             dis += Time.deltaTime * 2f;
-            render.material.SetFloat("_Level",dis);
+            render.material.SetFloat("_SliceAmount", dis);
             yield return 0;
         }
         Destroy(gameObject);
@@ -31,7 +31,8 @@ public class BrickWallController : MonoBehaviour
         {
             string powerupname = GameManager.Instance.GetPowerupName(GameManager.Instance.walkablePath[pathIndex].abilityType);
             UnityEngine.Object powerup = Resources.Load("Powerups/" + powerupname);
-            Instantiate(powerup, transform.position, Quaternion.identity);
+            PowerupController c = (Instantiate(powerup, transform.position, Quaternion.identity) as GameObject).GetComponent<PowerupController>();
+            c.AbilityType = GameManager.Instance.walkablePath[pathIndex].abilityType;
         }
     }
 

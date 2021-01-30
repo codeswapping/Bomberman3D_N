@@ -97,10 +97,10 @@ namespace BomberMan.Scripts.Player {
             while (dis < 1f)
             {
                 dis += Time.deltaTime * 2f;
-                render.material.SetFloat("_Level", dis);
+                render.material.SetFloat("_SliceAmount", dis);
                 yield return 0;
             }
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 }
