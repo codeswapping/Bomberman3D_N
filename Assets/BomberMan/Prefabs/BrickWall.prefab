@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 4349474803150753500}
   - component: {fileID: 182831065357460223}
   - component: {fileID: 3248849028506473634}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BrickWall
-  m_TagString: Untagged
+  m_TagString: BrickWall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -108,4 +108,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 739f9086a2999442b8ab930d810821d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  renderer: {fileID: 4349474803150753500}
+  render: {fileID: 0}
