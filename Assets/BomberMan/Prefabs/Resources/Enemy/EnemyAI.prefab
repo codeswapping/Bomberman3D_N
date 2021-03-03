@@ -315,9 +315,9 @@ GameObject:
   - component: {fileID: 7521655254916562710}
   - component: {fileID: 7521655254916562713}
   - component: {fileID: 7521655254916562712}
-  - component: {fileID: 7521655254916562715}
   - component: {fileID: 3442917639723870801}
   - component: {fileID: 131889086916629974}
+  - component: {fileID: 7521655254916562715}
   m_Layer: 9
   m_Name: EnemyAI
   m_TagString: Enemy
@@ -390,23 +390,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &7521655254916562715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7521655254916562714}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19f438879833c42e0a8d1e03741b0fc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsWalking: 0
-  walkSpeed: 1
-  minWalkTime: 2
-  maxWalkTime: 5
-  render: {fileID: 7521655254916562712}
 --- !u!65 &3442917639723870801
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -436,3 +419,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7521655254916562715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7521655254916562714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19f438879833c42e0a8d1e03741b0fc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsWalking: 0
+  walkSpeed: 1
+  minWalkTime: 2
+  maxWalkTime: 5
+  render: {fileID: 7521655254916562712}

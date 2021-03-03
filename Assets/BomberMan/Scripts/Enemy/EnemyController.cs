@@ -11,6 +11,7 @@ namespace BomberMan.Scripts.Enemy
         public float walkSpeed = 5f;
         public float minWalkTime = 2f, maxWalkTime = 5f;
         public Renderer render;
+        public FollowType followType;
 
         private Vector3 _nextPos;
         private float _currentWalkTime = 0f;
@@ -18,7 +19,7 @@ namespace BomberMan.Scripts.Enemy
         private bool isDead = false;
 
         private void Start()
-        {
+        { 
             var triggers = GetComponentsInChildren<TiggerManager>();
             //Debug.Log("Triggers : " + triggers.Length);
             foreach (var trigger in triggers)
@@ -36,7 +37,7 @@ namespace BomberMan.Scripts.Enemy
                 return;
             if (!IsWalking)
             {
-                CheckCanWalk();
+                IsWalking = CheckCanWalk();
                 return;
             }
 
@@ -53,6 +54,7 @@ namespace BomberMan.Scripts.Enemy
             var dirc = "";
             var dint = (int)d;
             var tempNextPos = _nextPos;
+            Debug.Log("Current Pos : " + _nextPos);
             if (_currentWalkTime <= 0)
             {
                 _currentWalkTime = Random.Range(minWalkTime, maxWalkTime);
@@ -73,7 +75,7 @@ namespace BomberMan.Scripts.Enemy
 
                         break;
                     case Direction.RIGHT:
-                        tempNextPos.x+=1;
+                        tempNextPos.x += 1;
 
                         break;
                     case Direction.TOP:
@@ -123,21 +125,22 @@ namespace BomberMan.Scripts.Enemy
 
         private bool IsWalkablePosition(Vector3 pos)
         {
-            //Debug.Log("Next Position : " + pos);
+            Debug.Log("Next Position : " + pos);
             WalkablePathInfo? v = null;
             foreach (var path in GameManager.Instance.walkablePath)
             {
                 if (path.position.Equals(pos) && !path.isBrickWall)
                 {
                     v = path;
+                    break;
                 }
             }
             if (v != null)
             {
-                return true;
+                return true;    
             }
 
-            //Debug.Log("Path is : " + v);
+            Debug.Log("Path is : " + v);
             return false;
         }
 
@@ -178,6 +181,12 @@ namespace BomberMan.Scripts.Enemy
                 yield return 0;
             }
             Destroy(gameObject);
+        }
+
+        public enum FollowType { 
+            NoFollow,
+            PartialFollow,
+            FullFollow
         }
     }
 }
